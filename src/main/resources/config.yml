@@ -1,0 +1,48 @@
+twitch:
+  client-id: ""
+  client-secret: ""
+  check-interval-seconds: 60
+
+announce-on-startup: false
+
+placeholders:
+  live: "Live 🔴"
+  live-compact: "🔴"
+  users-separator: ", "
+
+messages:
+  stream-started: "<red>🔴</red> <white><user></white> <gray>is live now:</gray> <aqua><click:open_url:'<link>'><link></click></aqua>"
+  currently-live: "<red>🔴</red> <gray>Live right now:</gray> <white><users></white>"
+  currently-live-entry: "<click:open_url:'<link>'><hover:show_text:'<gray><link>'><user></hover></click>"
+  currently-live-separator: "<gray>, </gray>"
+
+currently-live:
+  enabled: true
+  delay-ticks: 200
+
+sounds:
+  stream-started:
+    enabled: true
+    sound: "entity.experience_orb.pickup"
+    volume: 1.0
+    pitch: 1.0
+  currently-live:
+    enabled: true
+    sound: "entity.experience_orb.pickup"
+    volume: 1.0
+    pitch: 1.0
+
+command-messages:
+  added: "<green>Now tracking <white><user></white> at <link>"
+  updated: "<green>Updated <white><user></white> to <link>"
+  removed: "<green>Stopped tracking <white><user></white>"
+  not-tracked: "<red><user> is not tracked"
+  invalid-link: "<red>That is not a Twitch link. Use something like https://twitch.tv/name"
+  list-header: "<gray>Tracked streams:"
+  list-entry: "<white><user></white> <gray><link></gray> <state>"
+  list-empty: "<gray>Nothing is tracked yet"
+  state-live: "<red>live"
+  state-offline: "<dark_gray>offline"
+  reloaded: "<green>Reloaded"
+  no-credentials: "<red>Set twitch.client-id and twitch.client-secret in config.yml and reload"
+  usage: "<red>Use /hermod add NAME LINK, remove NAME, list or reload"

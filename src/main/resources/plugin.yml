@@ -1,0 +1,19 @@
+name: Hermod
+version: '${version}'
+main: com.github.asgard.hermod.HermodPlugin
+api-version: '1.18'
+folia-supported: true
+description: Announces when someone on the server goes live on Twitch
+author: Akis
+website: https://github.com/AsgardPlugins/Hermod
+softdepend:
+  - PlaceholderAPI
+commands:
+  hermod:
+    description: Manage the tracked streams
+    usage: /hermod <add|remove|list|reload>
+    permission: hermod.admin
+permissions:
+  hermod.admin:
+    description: Add and remove tracked streams and reload the config
+    default: op
