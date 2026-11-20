@@ -19,7 +19,7 @@ Drop the jar in `plugins/` and add streamers, nothing else is needed. For someth
 /hermod reload
 ```
 
-All of them need `hermod.admin`. The name is the Minecraft name, the link is `https://twitch.tv/<channel>`.
+All of them need `hermod.admin`. The name is the Minecraft name, the link is `https://twitch.tv/<channel>` or just the channel name.
 
 Messages use MiniMessage with `<user>`, `<link>` and `<users>` placeholders. The sounds, the join delay and the placeholder text are all in `config.yml`.
 

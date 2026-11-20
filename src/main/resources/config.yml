@@ -37,7 +37,7 @@ command-messages:
   updated: "<green>Updated <white><user></white> to <link>"
   removed: "<green>Stopped tracking <white><user></white>"
   not-tracked: "<red><user> is not tracked"
-  invalid-link: "<red>That is not a Twitch link. Use something like https://twitch.tv/name"
+  invalid-link: "<red>That is not a Twitch channel. Use the name or a link like https://twitch.tv/name"
   list-header: "<gray>Tracked streams:"
   list-entry: "<white><user></white> <gray><link></gray> <state>"
   list-empty: "<gray>Nothing is tracked yet"
