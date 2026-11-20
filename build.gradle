@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'xyz.jpenilla.run-paper' version '3.1.0'
+    id 'me.modmuss50.mod-publish-plugin' version '1.1.0'
+}
+
+group = 'com.github.asgard.hermod'
+version = findProperty('plugin_version')
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://repo.extendedclip.com/releases/' }
+}
+
+sourceSets {
+    folia
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:${paper_api}"
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+
+    foliaCompileOnly "io.papermc.paper:paper-api:${folia_api}"
+    foliaCompileOnly sourceSets.main.output
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+tasks.processResources {
+    inputs.property 'version', version
+    filesMatching('plugin.yml') {
+        expand(version: version)
+    }
+}
+
+tasks.jar {
+    archiveBaseName = 'hermod'
+    from sourceSets.folia.output
+}
+
+tasks.runServer {
+    minecraftVersion(findProperty('run_version'))
+}
+
+runPaper.folia.registerTask()
+
+apply from: 'publish.gradle'
