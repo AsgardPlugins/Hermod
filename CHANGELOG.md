@@ -2,6 +2,7 @@
 
 ## 1.0.0
 
+- Works without any setup through decapi.me, or with a Twitch app for the official API
 - Announce in chat and with a sound when a tracked streamer goes live on Twitch
 - Tell players who join who is already live, after a configurable delay
 - Add, remove and list streams with /hermod

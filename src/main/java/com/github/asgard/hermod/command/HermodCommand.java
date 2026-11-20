@@ -33,9 +33,6 @@ public final class HermodCommand implements CommandExecutor, TabCompleter {
             case "reload" -> {
                 plugin.reloadAll();
                 send(sender, "command-messages.reloaded");
-                if (!plugin.tracker().running()) {
-                    send(sender, "command-messages.no-credentials");
-                }
             }
             default -> send(sender, "command-messages.usage");
         }

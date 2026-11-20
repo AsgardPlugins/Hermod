@@ -7,7 +7,9 @@ import com.github.asgard.hermod.scheduler.PluginScheduler;
 import com.github.asgard.hermod.scheduler.Schedulers;
 import com.github.asgard.hermod.stream.LiveTracker;
 import com.github.asgard.hermod.stream.StreamStore;
-import com.github.asgard.hermod.stream.TwitchClient;
+import com.github.asgard.hermod.stream.DecapiSource;
+import com.github.asgard.hermod.stream.HelixSource;
+import com.github.asgard.hermod.stream.LiveSource;
 import java.io.File;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -60,8 +62,10 @@ public final class HermodPlugin extends JavaPlugin {
     }
 
     private void startTracking() {
-        TwitchClient client = new TwitchClient(config.twitchClientId(), config.twitchClientSecret());
-        tracker.start(client, config.checkIntervalTicks(), config.announceOnStartup());
+        boolean app = !config.twitchClientId().isEmpty() && !config.twitchClientSecret().isEmpty();
+        LiveSource source = app ? new HelixSource(config.twitchClientId(), config.twitchClientSecret()) : new DecapiSource();
+        getLogger().info(app ? "Checking streams with your Twitch app" : "Checking streams through decapi.me, set a Twitch app in config.yml for something more reliable");
+        tracker.start(source, config.checkIntervalTicks(), config.announceOnStartup());
     }
 
     public HermodConfig config() {

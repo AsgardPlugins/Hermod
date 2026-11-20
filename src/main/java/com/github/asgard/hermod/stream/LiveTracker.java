@@ -22,7 +22,7 @@ public final class LiveTracker {
     private final Consumer<StreamEntry> onLive;
     private final Map<String, StreamEntry> live = Collections.synchronizedMap(new LinkedHashMap<>());
 
-    private volatile TwitchClient client;
+    private volatile LiveSource source;
     private volatile boolean announceFirstPoll;
     private volatile boolean first = true;
     private volatile String lastStarted = "";
@@ -35,15 +35,11 @@ public final class LiveTracker {
         this.onLive = onLive;
     }
 
-    public void start(TwitchClient client, long intervalTicks, boolean announceFirstPoll) {
+    public void start(LiveSource source, long intervalTicks, boolean announceFirstPoll) {
         stop();
-        this.client = client;
+        this.source = source;
         this.announceFirstPoll = announceFirstPoll;
         this.first = true;
-        if (!client.configured()) {
-            logger.warning("Set twitch.client-id and twitch.client-secret in config.yml, no streams are checked until then");
-            return;
-        }
         task = scheduler.asyncTimer(this::poll, 20L, intervalTicks);
     }
 
@@ -82,7 +78,7 @@ public final class LiveTracker {
     }
 
     private synchronized void poll() {
-        TwitchClient twitch = client;
+        LiveSource twitch = source;
         List<StreamEntry> tracked = store.all();
         Map<String, StreamEntry> byLogin = new HashMap<>();
         for (StreamEntry entry : tracked) {

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public final class TwitchClient {
+public final class HelixSource implements LiveSource {
 
     private static final int BATCH = 100;
 
@@ -28,15 +28,12 @@ public final class TwitchClient {
     private final String clientSecret;
     private String token;
 
-    public TwitchClient(String clientId, String clientSecret) {
+    public HelixSource(String clientId, String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
 
-    public boolean configured() {
-        return !clientId.isBlank() && !clientSecret.isBlank();
-    }
-
+    @Override
     public Set<String> liveLogins(Collection<String> logins) throws IOException, InterruptedException {
         Set<String> live = new HashSet<>();
         List<String> list = new ArrayList<>(logins);

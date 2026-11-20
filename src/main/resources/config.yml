@@ -44,5 +44,4 @@ command-messages:
   state-live: "<red>live"
   state-offline: "<dark_gray>offline"
   reloaded: "<green>Reloaded"
-  no-credentials: "<red>Set twitch.client-id and twitch.client-secret in config.yml and reload"
   usage: "<red>Use /hermod add NAME LINK, remove NAME, list or reload"

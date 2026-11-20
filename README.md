@@ -4,13 +4,13 @@ Announces in chat when someone on the server goes live on Twitch, tells players 
 
 ## How it works
 
-`LiveTracker` asks the Twitch Helix API which tracked channels are live, on a timer (60 seconds by default, one request per 100 channels). A channel that was offline and is now live fires the stream started message to everyone online. Whoever joins gets the currently live message after a delay, so it shows up after the MOTD and the resource pack. Streamers are stored in `plugins/Hermod/streams.yml` as a Minecraft name and a Twitch link.
+`LiveTracker` asks a `LiveSource` which tracked channels are live, on a timer (60 seconds by default). Without any setup the source is decapi.me, a third party site that reports a channel's uptime, one request per channel. If you put a Twitch app in the config it uses the Twitch Helix API instead, one request per 100 channels, which is more reliable and has no third party in the middle. A channel that was offline and is now live fires the stream started message to everyone online. Whoever joins gets the currently live message after a delay, so it shows up after the MOTD and the resource pack. Streamers are stored in `plugins/Hermod/streams.yml` as a Minecraft name and a Twitch link.
 
 Messages go to each player through their own scheduler, so it works on Folia. The Folia scheduler is only loaded when Folia is detected, everything else uses the normal Bukkit scheduler.
 
 ## Using it
 
-Create an app at dev.twitch.tv, put the client id and secret in `config.yml`, then `/hermod reload`.
+Drop the jar in `plugins/` and add streamers, nothing else is needed. For something more reliable, create an app at dev.twitch.tv, put the client id and secret in `config.yml` and `/hermod reload`. The log says which source is in use.
 
 ```
 /hermod add <name> <link>
